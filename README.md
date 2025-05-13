@@ -34,7 +34,7 @@
 🔹NameNode
 
 ```java
-sudo sed -i "/PasswordAuthentication/ c\PasswordAuthentication yes" /etc/ssh/sshd_config
+sudo sed -i "/PasswordAuthentication/ c\PasswordAuthentication yes" /etc/ssh/ssh_config
 sudo systemctl restart sshd
 
 sudo apt-get install git
@@ -44,7 +44,7 @@ git clone https://github.com/psy337337/HadoopInstallTool.git
 🔹DataNode
 
 ```java
-sudo sed -i "/PasswordAuthentication/ c\PasswordAuthentication yes" /etc/ssh/sshd_config
+sudo sed -i "/PasswordAuthentication/ c\PasswordAuthentication yes" /etc/ssh/ssh_config
 sudo systemctl restart sshd
 
 sudo passwd ubuntu
