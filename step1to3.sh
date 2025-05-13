@@ -1,6 +1,6 @@
 
 #!/bin/bash
 
-./install.sh
-./hostset.sh $@
-./makeUser.sh
+./HadoopInstallTool/install.sh
+./HadoopInstallTool/hostset.sh $@
+./HadoopInstallTool/makeUser.sh

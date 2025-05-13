@@ -19,7 +19,7 @@ done
 # remove space
 all=${all::-1}
 
-./step1to3.sh $all
+./HadoopInstallTool/step1to3.sh $all
 
 
 num=0
@@ -31,12 +31,12 @@ do
         continue
     fi
     sshpass -p $passwd ssh ubuntu@$i -o StrictHostKeyChecking=no "sudo apt-get install git"
-    sshpass -p $passwd ssh ubuntu@$i -o StrictHostKeyChecking=no "git clone https://github.com/psy337337/HadoopInstallTool.git; ./step1to3.sh $all"
+    sshpass -p $passwd ssh ubuntu@$i -o StrictHostKeyChecking=no "git clone https://github.com/psy337337/HadoopInstallTool.git; ./HadoopInstallTool/step1to3.sh $all"
 done
 
 
 # connect NameNode
-sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git; ./connect.sh"
+sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git; ./HadoopInstallTool/connect.sh"
 
 
 # connect DataNode
@@ -47,13 +47,13 @@ do
         num=$(($num+1))
         continue
     fi
-    sshpass -p hadoop ssh hadoop@$i -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git; ./connect.sh"
+    sshpass -p hadoop ssh hadoop@$i -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git; ./HadoopInstallTool/connect.sh"
 done
 
 
 
-echo "hadoop" | su - hadoop -c "cd; ./installHadoop.sh; source ~/.bashrc;"
+echo "hadoop" | su - hadoop -c "cd; ./HadoopInstallTool/installHadoop.sh; source ~/.bashrc;"
 
-./inputProfile.sh
+./HadoopInstallTool/inputProfile.sh
 
-sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd ~; pwd; source ~/.bashrc; ./setHadoop.sh"
+sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd ~; pwd; source ~/.bashrc; ./HadoopInstallTool/setHadoop.sh"

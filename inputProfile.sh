@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cat ./profile.txt | sudo tee -a /etc/profile
+cat ./HadoopInstallTool/profile.txt | sudo tee -a /etc/profile
 source /etc/profile
