@@ -30,7 +30,7 @@ do
         num=$(($num+1))
         continue
     fi
-    sshpass -p $passwd ssh ubuntu@$i -o StrictHostKeyChecking=no "sudo apt-get install git"
+    sshpass -p $passwd ssh ubuntu@$i -o StrictHostKeyChecking=no "echo ubuntu | sudo -S apt-get install -y git"
     sshpass -p $passwd ssh ubuntu@$i -o StrictHostKeyChecking=no "git clone https://github.com/psy337337/HadoopInstallTool.git; ./HadoopInstallTool/step1to3.sh $all"
 done
 
