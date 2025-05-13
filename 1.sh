@@ -5,7 +5,7 @@ if [ $# -eq 0 ];then
     exit 0
 fi
 
-./aporrima/hadoop/step1to3.sh $@
+./step1to3.sh $@
 
 #first time can't used sshpass
 
@@ -22,11 +22,11 @@ do
         continue
     fi
     sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "sudo apt-get install git" 
-    sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "git clone https://github.com/boanlab/aporrima.git; ./aporrima/hadoop/step1to3.sh $@"
+    sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "git clone https://github.com/psy337337/HadoopInstallTool.git; ./step1to3.sh $@"
 done
 
 # sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t
-sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/boanlab/aporrima.git; ./aporrima/hadoop/connect.sh"
+sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git; ./connect.sh"
 
 
 
@@ -37,13 +37,13 @@ do
 	if [ "$(($num%2))" == "1" ]; then
 		continue
 	fi
-	sshpass -p hadoop ssh hadoop@$i -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/boanlab/aporrima.git; ./aporrima/hadoop/connect.sh"
+	sshpass -p hadoop ssh hadoop@$i -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git; ./connect.sh"
 done
 
 
 
-echo "hadoop" | su - hadoop -c "cd; ./aporrima/hadoop/installHadoop.sh; source ~/.bashrc;"
+echo "hadoop" | su - hadoop -c "cd; ./installHadoop.sh; source ~/.bashrc;"
 
-./aporrima/hadoop/inputProfile.sh
+./inputProfile.sh
 
-sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd ~; pwd; source ~/.bashrc; ./aporrima/hadoop/setHadoop.sh"
+sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd ~; pwd; source ~/.bashrc; ./setHadoop.sh"

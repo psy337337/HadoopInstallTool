@@ -38,7 +38,7 @@ sudo sed -i "/PasswordAuthentication/ c\PasswordAuthentication yes" /etc/ssh/ssh
 sudo systemctl restart sshd
 
 sudo apt-get install git
-git clone https://github.com/boanlab/aporrima.git
+git clone https://github.com/psy337337/HadoopInstallTool.git
 ```
 
 🔹DataNode
