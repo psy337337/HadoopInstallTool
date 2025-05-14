@@ -19,8 +19,8 @@ done
 # remove space
 all=${all::-1}
 
-./HadoopInstallTool/step1to3.sh $all
-
+./HadoopInstallTool/hostset.sh $all
+./HadoopInstallTool/makeUser.sh
 
 num=0
 passwd="ubuntu"
