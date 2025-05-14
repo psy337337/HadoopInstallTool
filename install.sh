@@ -17,10 +17,10 @@ if [ "$(which ssh)" == "" ]; then
     sudo apt install openssh-server openssh-client -y
 fi
 if [ "$(which netstat)" == "" ]; then
-    sudo apt install net-tools
+    sudo apt install net-tools -y
 fi
 if [ "$(which sshpass)" == "" ]; then
-    sudo apt-get install sshpass
+    sudo apt-get install sshpass -y
 fi
 
 
