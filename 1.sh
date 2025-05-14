@@ -8,7 +8,7 @@ fi
 ./HadoopInstallTool/step1to3.sh $@
 
 #first time can't used sshpass
-
+# test commit and push file in company's computer
 
 num=0
 address=""
