@@ -18,7 +18,7 @@ address=${address::-1}
 
 # datanode install+hostset+makeUserHadoop
 sshpass -p $2 ssh ubuntu@$1 -o StrictHostKeyChecking=no "sudo apt-get install git" 
-sshpass -p $2 ssh ubuntu@$1 -o StrictHostKeyChecking=no "git clone https://github.com/psy337337/HadoopInstallTool.git; ./HadoopInstallTool/step1to3.sh $address"
+sshpass -p $2 ssh ubuntu@$1 -o StrictHostKeyChecking=no "git clone https://github.com/psy337337/HadoopInstallTool.git; ./HadoopInstallTool/hostset.sh $address; ./HadoopInstallTool/makeUser.sh"
 
 # connect namenode & datanode
 sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd; ssh-copy-id -i /home/hadoop/.ssh/id_rsa.pub hadoop@$1"

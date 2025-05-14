@@ -51,6 +51,7 @@ sudo systemctl restart sshd
 ```java
 sudo apt update
 sudo apt install openssh-server -y
+sudo apt install net-tools -y
 sudo sed -i "/PasswordAuthentication/ c\PasswordAuthentication yes" /etc/ssh/sshd_config
 sudo systemctl restart sshd
 

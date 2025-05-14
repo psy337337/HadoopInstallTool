@@ -31,7 +31,7 @@ do
         continue
     fi
     sshpass -p $passwd ssh ubuntu@$i -o StrictHostKeyChecking=no "echo ubuntu | sudo -S apt-get install -y git"
-    sshpass -p $passwd ssh ubuntu@$i -o StrictHostKeyChecking=no "git clone https://github.com/psy337337/HadoopInstallTool.git; chmod +x ./HadoopInstallTool/*.sh; ./HadoopInstallTool/step1to3.sh $all"
+    sshpass -p $passwd ssh ubuntu@$i -o StrictHostKeyChecking=no "git clone https://github.com/psy337337/HadoopInstallTool.git; chmod +x ./HadoopInstallTool/*.sh; ./HadoopInstallTool/hostset.sh $all; ./HadoopInstallTool/makeUser.sh"
 done
 
 
