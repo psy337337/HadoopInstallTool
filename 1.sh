@@ -5,7 +5,8 @@ if [ $# -eq 0 ];then
     exit 0
 fi
 
-./HadoopInstallTool/step1to3.sh $@
+./HadoopInstallTool/hostset.sh $@
+./HadoopInstallTool/makeUser.sh
 
 #first time can't used sshpass
 
