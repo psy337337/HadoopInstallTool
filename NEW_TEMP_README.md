@@ -36,9 +36,10 @@
 ```java
 sudo apt update
 
-sudo apt-get install git
+sudo apt-get install git -y
 git clone https://github.com/psy337337/HadoopInstallTool.git
 ./HadoopInstallTool/install.sh
+chmod +x ./HadoopInstallTool/*.sh
 
 sudo sed -i "/PasswordAuthentication/ c\PasswordAuthentication yes" /etc/ssh/sshd_config
 sudo systemctl restart sshd

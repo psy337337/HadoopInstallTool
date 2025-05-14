@@ -22,11 +22,11 @@ do
         continue
     fi
     sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "echo ubuntu | sudo -S apt-get install -y git" 
-    sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "git clone https://github.com/psy337337/HadoopInstallTool.git; ./HadoopInstallTool/step1to3.sh $@"
+    sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "git clone https://github.com/psy337337/HadoopInstallTool.git; chmod +x ./HadoopInstallTool/*.sh; ./HadoopInstallTool/step1to3.sh $@"
 done
 
 # sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t
-sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git; ./HadoopInstallTool/connect.sh"
+sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git; chmod +x ./HadoopInstallTool/*.sh; ./HadoopInstallTool/connect.sh"
 
 
 
@@ -37,7 +37,9 @@ do
 	if [ "$(($num%2))" == "1" ]; then
 		continue
 	fi
-	sshpass -p hadoop ssh hadoop@$i -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git; ./HadoopInstallTool/connect.sh"
+	sshpass -p hadoop ssh hadoop@$i -o StrictHostKeyChecking=no -t "cd; \
+    git clone https://github.com/psy337337/HadoopInstallTool.git; \
+    chmod +x ./HadoopInstallTool/*.sh; ./HadoopInstallTool/connect.sh"
 done
 
 
