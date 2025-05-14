@@ -36,7 +36,7 @@
 ```java
 sudo apt update
 
-sudo apt-get install git -y
+sudo apt install git -y
 git clone https://github.com/psy337337/HadoopInstallTool.git
 ./HadoopInstallTool/install.sh
 chmod +x ./HadoopInstallTool/*.sh
