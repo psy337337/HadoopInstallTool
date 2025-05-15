@@ -24,7 +24,7 @@ fi
 #     sudo apt install openssh-server -y
 #     sudo apt install openssh-client -y
 # fi
-if ! dpkg -s openssh-server >/dev/null 2>&1; then
+if ! dpkg -s openssh-server >/dev/null 2>&1; then # >/dev/null 2>&1 : 모든 출력을 무시
     sudo apt install openssh-server -y
     sudo apt install openssh-client -y
 fi
