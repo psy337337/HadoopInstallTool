@@ -32,8 +32,8 @@ do
 done
 
 # sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t
-sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git; &&\
-                        echo hadoop | sudo -S chmod +x ./HadoopInstallTool/*.sh; &&\
+sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git &&\
+                        echo hadoop | sudo -S chmod +x ./HadoopInstallTool/*.sh &&\
                         echo hadoop | sudo -S ./HadoopInstallTool/connect.sh"
 
 
