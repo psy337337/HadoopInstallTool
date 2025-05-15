@@ -10,8 +10,15 @@ fi
 
 # update repo JAVA, ssh, net-tools, sshpass 
 sudo apt-get update
-if [ "$(which java)" == "" ]; then
-    sudo apt install openjdk-11-jdk -y
+if [ ! -x "$(command -v java)" ]; then
+    # install java
+    sudo apt-get -y install openjdk-11-jdk
+
+    # add JAVA_HOME
+    echo >> /home/$USER/.bashrc
+    echo "export JAVA_HOME=\$(readlink -f /usr/bin/java | sed 's:bin/java::')" >> /home/$USER/.bashrc
+else
+    echo "Found Java, skipping the installation of Java."
 fi
 if [ "$(which ssh)" == "" ]; then
     sudo apt install openssh-server openssh-client -y
