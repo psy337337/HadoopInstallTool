@@ -22,7 +22,10 @@ do
         continue
     fi
     sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "echo ubuntu | sudo -S apt-get install -y git" 
-    sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "git clone https://github.com/psy337337/HadoopInstallTool.git; chmod +x ./HadoopInstallTool/*.sh; ./HadoopInstallTool/hostset.sh $@; ./HadoopInstallTool/makeUser.sh"
+    sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "echo ubuntu | sudo -S git clone https://github.com/psy337337/HadoopInstallTool.git && \
+                                                                                    sudo chmod +x ./HadoopInstallTool/*.sh && \
+                                                                                    sudo ./HadoopInstallTool/hostset.sh $@ && \
+                                                                                    sudo ./HadoopInstallTool/makeUser.sh"
 done
 
 # sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t
