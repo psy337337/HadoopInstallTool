@@ -21,13 +21,14 @@ else
     echo "Found Java, skipping the installation of Java."
 fi
 if [ "$(which ssh)" == "" ]; then
-    sudo apt install openssh-server openssh-client -y
-fi
-if [ "$(which netstat)" == "" ]; then
-    sudo apt install net-tools -y
+    sudo apt install openssh-server -y
+    sudo apt install openssh-client -y
 fi
 if [ "$(which sshpass)" == "" ]; then
     sudo apt-get install sshpass -y
+fi
+if [ "$(which netstat)" == "" ]; then
+    sudo apt install net-tools -y
 fi
 
 
