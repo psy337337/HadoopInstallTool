@@ -36,6 +36,7 @@
 ```java
 sudo apt update
 
+sudo apt install openssh-server -y
 sudo apt install git -y
 git clone https://github.com/psy337337/HadoopInstallTool.git
 chmod +x ./HadoopInstallTool/*.sh
