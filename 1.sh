@@ -22,14 +22,16 @@ do
         continue
     fi
     sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "echo ubuntu | sudo -S apt-get install -y git" 
-    sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "echo ubuntu | sudo -S git clone https://github.com/psy337337/HadoopInstallTool.git && \
-                                                                                    sudo chmod +x ./HadoopInstallTool/*.sh && \
-                                                                                    sudo ./HadoopInstallTool/hostset.sh $@ && \
-                                                                                    sudo ./HadoopInstallTool/makeUser.sh"
+    sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "git clone https://github.com/psy337337/HadoopInstallTool.git && \
+                                                                                    echo ubuntu | sudo -S chmod +x ./HadoopInstallTool/*.sh && \
+                                                                                    echo ubuntu | sudo -S ./HadoopInstallTool/hostset.sh $@ && \
+                                                                                    echo ubuntu | sudo -S ./HadoopInstallTool/makeUser.sh"
 done
 
 # sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t
-sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git; chmod +x ./HadoopInstallTool/*.sh; ./HadoopInstallTool/connect.sh"
+sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git; &&\
+                        echo hadoop | sudo -S chmod +x ./HadoopInstallTool/*.sh; &&\
+                        echo hadoop | sudo -S ./HadoopInstallTool/connect.sh"
 
 
 
@@ -42,7 +44,7 @@ do
 	fi
 	sshpass -p hadoop ssh hadoop@$i -o StrictHostKeyChecking=no -t "cd; \
     git clone https://github.com/psy337337/HadoopInstallTool.git; \
-    chmod +x ./HadoopInstallTool/*.sh; ./HadoopInstallTool/connect.sh"
+    echo hadoop | sudo -S chmod +x ./HadoopInstallTool/*.sh; echo hadoop | sudo -S ./HadoopInstallTool/connect.sh"
 done
 
 
