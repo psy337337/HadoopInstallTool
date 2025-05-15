@@ -20,7 +20,11 @@ if [ ! -x "$(command -v java)" ]; then
 else
     echo "Found Java, skipping the installation of Java."
 fi
-if [ "$(which ssh)" == "" ]; then
+# if [ "$(which ssh)" == "" ]; then
+#     sudo apt install openssh-server -y
+#     sudo apt install openssh-client -y
+# fi
+if ! dpkg -s openssh-server >/dev/null 2>&1; then
     sudo apt install openssh-server -y
     sudo apt install openssh-client -y
 fi
