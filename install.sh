@@ -29,7 +29,7 @@ if ! dpkg -s openssh-server >/dev/null 2>&1; then # >/dev/null 2>&1 : 모든 출
     sudo apt install openssh-client -y
 fi
 if [ "$(which sshpass)" == "" ]; then
-    sudo apt-get install sshpass -y
+    sudo apt install sshpass -y
 fi
 if [ "$(which netstat)" == "" ]; then
     sudo apt install net-tools -y
