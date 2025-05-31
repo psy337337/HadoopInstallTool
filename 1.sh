@@ -32,23 +32,23 @@
 # done
 
 # sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t
-sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git &&\
-                        echo hadoop | sudo -S chmod +x ./HadoopInstallTool/*.sh &&\
-                        echo hadoop | sudo -S ./HadoopInstallTool/connect.sh"
+# sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git &&\
+#                         echo hadoop | sudo -S chmod +x ./HadoopInstallTool/*.sh &&\
+#                         echo hadoop | sudo -S ./HadoopInstallTool/connect.sh"
 
 
 
-# num=0
-# for i in $@
-# do
-# 	num=$(($num+1))
-# 	if [ "$(($num%2))" == "1" ]; then
-# 		continue
-# 	fi
-# 	sshpass -p hadoop ssh hadoop@$i -o StrictHostKeyChecking=no -t "cd; \
-#     git clone https://github.com/psy337337/HadoopInstallTool.git; \
-#     echo hadoop | sudo -S chmod +x ./HadoopInstallTool/*.sh; echo hadoop | sudo -S ./HadoopInstallTool/connect.sh"
-# done
+num=0
+for i in $@
+do
+	num=$(($num+1))
+	if [ "$(($num%2))" == "1" ]; then
+		continue
+	fi
+	sshpass -p hadoop ssh hadoop@$i -o StrictHostKeyChecking=no -t "cd; \
+    git clone https://github.com/psy337337/HadoopInstallTool.git; \
+    echo hadoop | sudo -S chmod +x ./HadoopInstallTool/*.sh; echo hadoop | sudo -S ./HadoopInstallTool/connect.sh"
+done
 
 
 
