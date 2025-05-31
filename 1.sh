@@ -47,7 +47,8 @@ do
 	fi
 	sshpass -p hadoop ssh hadoop@$i -o StrictHostKeyChecking=no -t "cd; \
     git clone https://github.com/psy337337/HadoopInstallTool.git; \
-    echo hadoop | sudo -S chmod +x ./HadoopInstallTool/*.sh; echo hadoop | sudo -S ./HadoopInstallTool/connect.sh"
+    echo hadoop | sudo -S chmod +x ./HadoopInstallTool/*.sh; \
+    echo hadoop | sudo -S ./HadoopInstallTool/connect.sh"
 done
 
 
