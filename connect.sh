@@ -20,7 +20,7 @@ for ip in $(awk '/hd/ {print $1}' /etc/hosts); do
     fi
 
     echo "Trying ssh-copy-id to $ip ..."
-    sshpass -p hadoop ssh-copy-id -i ~/.ssh/id_rsa.pub -o StrictHostKeyChecking=no hadoop@$ip \
+    sshpass -p hadoop ssh-copy-id -i /home/hadoop/.ssh/id_rsa.pub -o StrictHostKeyChecking=no hadoop@$ip \
                     && echo "!!✅ Success for $ip" \
                     || echo "!!❌ Failed for $ip"
 done
