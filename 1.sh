@@ -31,29 +31,29 @@ do
         echo ubuntu | sudo -S bash -c 'echo \"hadoop ALL=(ALL) NOPASSWD:ALL\" > /etc/sudoers.d/hadoop && chmod 440 /etc/sudoers.d/hadoop'"
 done
 
-# sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t
-sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git &&\
-                        echo hadoop | sudo -S chmod +x ./HadoopInstallTool/*.sh &&\
-                        echo hadoop | sudo -S ./HadoopInstallTool/connect.sh"
+# # sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t
+# sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git &&\
+#                         echo hadoop | sudo -S chmod +x ./HadoopInstallTool/*.sh &&\
+#                         echo hadoop | sudo -S ./HadoopInstallTool/connect.sh"
 
 
 
-num=0
-for i in $@
-do
-	num=$(($num+1))
-	if [ "$(($num%2))" == "1" ]; then
-		continue
-	fi
-	sshpass -p hadoop ssh hadoop@$i -o StrictHostKeyChecking=no -t "cd; \
-    git clone https://github.com/psy337337/HadoopInstallTool.git; \
-    echo hadoop | sudo -S chmod +x ./HadoopInstallTool/*.sh; echo hadoop | sudo -S ./HadoopInstallTool/connect.sh"
-done
+# num=0
+# for i in $@
+# do
+# 	num=$(($num+1))
+# 	if [ "$(($num%2))" == "1" ]; then
+# 		continue
+# 	fi
+# 	sshpass -p hadoop ssh hadoop@$i -o StrictHostKeyChecking=no -t "cd; \
+#     git clone https://github.com/psy337337/HadoopInstallTool.git; \
+#     echo hadoop | sudo -S chmod +x ./HadoopInstallTool/*.sh; echo hadoop | sudo -S ./HadoopInstallTool/connect.sh"
+# done
 
 
 
-echo "hadoop" | su - hadoop -c "cd; ./HadoopInstallTool/installHadoop.sh; source ~/.bashrc;"
+# echo "hadoop" | su - hadoop -c "cd; ./HadoopInstallTool/installHadoop.sh; source ~/.bashrc;"
 
-./HadoopInstallTool/inputProfile.sh
+# ./HadoopInstallTool/inputProfile.sh
 
-sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd ~; pwd; source ~/.bashrc; ./HadoopInstallTool/setHadoop.sh"
+# sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd ~; pwd; source ~/.bashrc; ./HadoopInstallTool/setHadoop.sh"
