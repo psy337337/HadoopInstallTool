@@ -3,11 +3,14 @@
 cd /home/hadoop
 
 # SSH 키 생성
-ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N ""
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-chmod 700 ~/.ssh
-chmod 600 ~/.ssh/authorized_keys
-chown -R hadoop:hadoop ~/.ssh
+HOME_DIR=/home/hadoop
+mkdir -p $HOME_DIR/.ssh
+ssh-keygen -t rsa -f $HOME_DIR/.ssh/id_rsa -q -N ""
+cat $HOME_DIR/.ssh/id_rsa.pub >> $HOME_DIR/.ssh/authorized_keys
+chmod 700 $HOME_DIR/.ssh
+chmod 600 $HOME_DIR/.ssh/authorized_keys
+chown -R hadoop:hadoop $HOME_DIR/.ssh
+
 
 # 자기 자신의 IP 주소 구함
 MY_IP=$(hostname -I | awk '{print $1}')
