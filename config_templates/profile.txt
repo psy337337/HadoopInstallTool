@@ -1,4 +1,4 @@
-export HADOOP_HOME=/home/hadoop/hadoop-3.3.4
+export HADOOP_HOME=/home/hadoop/hadoop-3.4.1
 export HADOOP_HDFS_HOME=$HADOOP_HOME
 export YARN_HOME=$HADOOP_HOME
 
