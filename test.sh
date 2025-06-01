@@ -1,22 +1,5 @@
 #!/bin/bash
 
-# setting workers
-cat /dev/null > ./hadoop/etc/hadoop/workers
-for i in $(sed -n '/hd/p' /etc/hosts)
-do
-        if [[ "${i}" == *"hdw"* ]];then
-                echo $i >> ./hadoop/etc/hadoop/workers
-        fi
-done
-
-
-
-
-javah=$(readlink -f /usr/bin/java | sed 's:bin/java::')
-sed -i "/export JAVA_HOME/ c\export JAVA_HOME=${javah}" ./hadoop/etc/hadoop/hadoop-env.sh
-
-
-
 lists=("core-site" "hdfs-site" "mapred-site" "yarn-site")
 
 for i in "${lists[@]}"
