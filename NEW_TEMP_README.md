@@ -36,7 +36,6 @@
 ```java
 sudo apt update
 
-sudo apt install openssh-server -y
 sudo apt install git -y
 git clone https://github.com/psy337337/HadoopInstallTool.git
 chmod +x ./HadoopInstallTool/*.sh
@@ -51,8 +50,12 @@ sudo systemctl restart sshd
 
 ```java
 sudo apt update
-sudo apt install openssh-server -y
-sudo apt install net-tools -y
+
+sudo apt install git -y
+git clone https://github.com/psy337337/HadoopInstallTool.git
+chmod +x ./HadoopInstallTool/*.sh
+./HadoopInstallTool/install.sh
+
 sudo sed -i "/PasswordAuthentication/ c\PasswordAuthentication yes" /etc/ssh/sshd_config
 sudo systemctl restart sshd
 

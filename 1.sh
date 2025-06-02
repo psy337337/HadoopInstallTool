@@ -23,13 +23,14 @@ do
     elif [ "$num" == "1" ]; then
         continue
     fi
-    sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "echo ubuntu | sudo -S apt-get install -y git" 
-    sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "git clone https://github.com/psy337337/HadoopInstallTool.git && \
-                                                                                    echo ubuntu | sudo -S chmod +x ./HadoopInstallTool/*.sh && \
-                                                                                    echo ubuntu | sudo -S ./HadoopInstallTool/hostset.sh $@ && \
-                                                                                    echo ubuntu | sudo -S ./HadoopInstallTool/makeUser.sh && \
-        echo ubuntu | sudo -S bash -c 'echo \"hadoop ALL=(ALL) NOPASSWD:ALL\" > /etc/sudoers.d/hadoop && chmod 440 /etc/sudoers.d/hadoop'"
-    sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "echo ubuntu | sudo ./HadoopInstallTool/install.sh" 
+    # sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "echo $i | sudo -S apt-get install -y git" 
+    # sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "git clone https://github.com/psy337337/HadoopInstallTool.git && \
+    
+                                                                                    # echo $i | sudo -S chmod +x ./HadoopInstallTool/*.sh && \
+    sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "echo $i | sudo -S ./HadoopInstallTool/hostset.sh $@ && \
+                                                                                    echo $i | sudo -S ./HadoopInstallTool/makeUser.sh && \
+        echo $i | sudo -S bash -c 'echo \"hadoop ALL=(ALL) NOPASSWD:ALL\" > /etc/sudoers.d/hadoop && chmod 440 /etc/sudoers.d/hadoop'"
+    # sshpass -p $i ssh ubuntu@$address -o StrictHostKeyChecking=no "echo $i | sudo ./HadoopInstallTool/install.sh" 
 done
 
 sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git &&\
