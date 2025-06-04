@@ -5,11 +5,12 @@
 ## Step 1 - **Environmental Preparation**
 
 - ubuntu 22.04
-- OpenJDK 11
-- OpenSSH
-- net-tools
-- sshpass
-    - Automatically install packages if they are not installed
+- Packages that must be installed
+    - OpenJDK 11
+    - OpenSSH
+    - net-tools
+    - sshpass
+- You can install packages automatically using `install.sh` if you want (I recommend using it.)
 
 🔸**NameNode**
 
@@ -21,6 +22,9 @@
 🔸**DataNode**
 
 - Change public key authentication to password-based authentication
+- git install
+- git clone
+    - Git clone for Script Execution
 - ubuntu passwd
     - Ubuntu Account Password Settings
 
@@ -112,7 +116,7 @@ Input the Ubuntu password you want `ex. ubuntu`
 
 ## Step 3 - Starting Hadoop
 
-You just have to enter the following command in NameNode’s hadoop account
+You just have to enter the following command in **NameNode’s hadoop account**
 
 `hdfs namenode -format`
 
