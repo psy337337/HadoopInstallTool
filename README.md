@@ -42,7 +42,7 @@ sudo apt update
 
 sudo apt install git -y
 git clone https://github.com/psy337337/HadoopInstallTool.git
-chmod +x ./HadoopInstallTool/script/*.sh
+find ./HadoopInstallTool -type f -name '*.sh' -exec chmod +x {} \;
 ./HadoopInstallTool/install.sh
 
 
@@ -57,7 +57,7 @@ sudo apt update
 
 sudo apt install git -y
 git clone https://github.com/psy337337/HadoopInstallTool.git
-chmod +x ./HadoopInstallTool/script/*.sh
+find ./HadoopInstallTool -type f -name '*.sh' -exec chmod +x {} \;
 ./HadoopInstallTool/install.sh
 
 sudo sed -i "/PasswordAuthentication/ c\PasswordAuthentication yes" /etc/ssh/sshd_config
