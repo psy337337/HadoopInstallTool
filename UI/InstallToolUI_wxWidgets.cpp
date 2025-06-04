@@ -1,5 +1,6 @@
 #include <vector>
 #include <string>
+#include <memory>
 #include <wx/wx.h>
 #include <wx/listctrl.h>
 
@@ -16,7 +17,6 @@
 // sudo apt install libopencv-
 // sudo apt install clang-format
 
-
 enum class FormMode
 {
     Edit,
@@ -30,35 +30,13 @@ public:
     EditDialog(wxWindow *parent, const wxString &addressValue, const wxString &passwordValue, FormMode mode)
         : wxDialog(parent, wxID_ANY, "Dialog Title", wxDefaultPosition, wxSize(300, 150))
     {
+        InitializeUI(addressValue, passwordValue, mode, true);
+    }
 
-        // 타이틀 지정
-        SetTitle(mode == FormMode::Edit ? "Edit Item" : mode == FormMode::Add ? "Add Item"
-                                                                              : "Error");
-
-        wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
-
-        // 주소
-        wxBoxSizer *addressSizer = new wxBoxSizer(wxHORIZONTAL);
-        addressSizer->Add(new wxStaticText(this, wxID_ANY, "IP Address:"), 0, wxALL, 10);
-        textAddress = new wxTextCtrl(this, wxID_ANY, addressValue);
-        addressSizer->Add(textAddress, 0, wxALL, 10);
-
-        // 비밀번호
-        wxBoxSizer *passwordSizer = new wxBoxSizer(wxHORIZONTAL);
-        passwordSizer->Add(new wxStaticText(this, wxID_ANY, "Password:"), 0, wxALL, 10);
-        textPassword = new wxTextCtrl(this, wxID_ANY, passwordValue);
-        passwordSizer->Add(textPassword, 0, wxALL, 10);
-
-        // 버튼
-        wxBoxSizer *btnSizer = new wxBoxSizer(wxHORIZONTAL);
-        btnSizer->Add(new wxButton(this, wxID_OK, "Apply"), 0, wxALL, 5);
-        btnSizer->Add(new wxButton(this, wxID_CANCEL, "Cancel"), 0, wxALL, 5);
-
-        sizer->Add(addressSizer, 1, wxALIGN_LEFT);
-        sizer->Add(passwordSizer, 1, wxALIGN_LEFT);
-        sizer->Add(btnSizer, 1, wxALIGN_RIGHT);
-
-        SetSizerAndFit(sizer);
+    EditDialog(wxWindow *parent, const wxString &addressValue, FormMode mode)
+        : wxDialog(parent, wxID_ANY, "Dialog Title", wxDefaultPosition, wxSize(300, 150))
+    {
+        InitializeUI(addressValue, "", mode, false);
     }
 
     wxString GetAddress() const
@@ -73,7 +51,40 @@ public:
 
 private:
     wxTextCtrl *textAddress;
-    wxTextCtrl *textPassword;
+    wxTextCtrl *textPassword = nullptr; // Optional
+
+    void InitializeUI(const wxString &addressValue, const wxString &passwordValue, FormMode mode, bool includePassword)
+    {
+        SetTitle(mode == FormMode::Edit ? "Edit Item" : mode == FormMode::Add ? "Add Item"
+                                                                              : "Error");
+
+        wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
+
+        // 주소 필드
+        wxBoxSizer *addressSizer = new wxBoxSizer(wxHORIZONTAL);
+        addressSizer->Add(new wxStaticText(this, wxID_ANY, "IP Address:"), 0, wxALL, 10);
+        textAddress = new wxTextCtrl(this, wxID_ANY, addressValue);
+        addressSizer->Add(textAddress, 0, wxALL, 10);
+        sizer->Add(addressSizer, 1, wxALIGN_LEFT);
+
+        // 비밀번호 필드 (선택적)
+        if (includePassword)
+        {
+            wxBoxSizer *passwordSizer = new wxBoxSizer(wxHORIZONTAL);
+            passwordSizer->Add(new wxStaticText(this, wxID_ANY, "Password:"), 0, wxALL, 10);
+            textPassword = new wxTextCtrl(this, wxID_ANY, passwordValue);
+            passwordSizer->Add(textPassword, 0, wxALL, 10);
+            sizer->Add(passwordSizer, 1, wxALIGN_LEFT);
+        }
+
+        // 버튼
+        wxBoxSizer *btnSizer = new wxBoxSizer(wxHORIZONTAL);
+        btnSizer->Add(new wxButton(this, wxID_OK, "Apply"), 0, wxALL, 5);
+        btnSizer->Add(new wxButton(this, wxID_CANCEL, "Cancel"), 0, wxALL, 5);
+        sizer->Add(btnSizer, 1, wxALIGN_RIGHT);
+
+        SetSizerAndFit(sizer);
+    }
 };
 
 // 메인 프레임
@@ -92,11 +103,9 @@ public:
         // 리스트 셋팅
         listView1 = new wxListView(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT);
         listView1->InsertColumn(0, "Address");
-        listView1->InsertColumn(1, "Password");
 
         // 초기값 삽입
         long itemIndex = listView1->InsertItem(0, "127.0.0.1");
-        listView1->SetItem(itemIndex, 1, "1234");
 
         // 편집 버튼
         wxButton *editButton1 = new wxButton(this, wxID_ANY, "Edit");
@@ -130,9 +139,9 @@ public:
         wxButton *deleteButton2 = new wxButton(this, wxID_ANY, "Delete");
 
         // 버튼 함수 연결
-        addButton2->Bind(wxEVT_BUTTON, &NameNodeFrame::AddList2, this);
+        addButton2->Bind(wxEVT_BUTTON, &NameNodeFrame::AddList, this);
         editButton2->Bind(wxEVT_BUTTON, &NameNodeFrame::OnEditList2, this);
-        deleteButton2->Bind(wxEVT_BUTTON, &NameNodeFrame::DeleteList2, this);
+        deleteButton2->Bind(wxEVT_BUTTON, &NameNodeFrame::DeleteList, this);
 
         // 버튼 추가
         buttonRow->Add(addButton2, 0, wxALL, 5);
@@ -179,7 +188,7 @@ private:
         if (result == 0)
         {
             // listView는 wxListView* 객체라고 가정
-            
+
             std::cout << "실행 완료\n";
             // 성공적으로 실행됨
         }
@@ -196,15 +205,15 @@ private:
 
     void OnEditList1(wxCommandEvent &)
     {
-        EditListItem(listView1);
+        EditListItem(listView1, false);
     }
 
     void OnEditList2(wxCommandEvent &)
     {
-        EditListItem(listView2);
+        EditListItem(listView2, true);
     }
 
-    void EditListItem(wxListView *listView)
+    void EditListItem(wxListView *listView, bool hasPassword)
     {
         if (!listView)
         {
@@ -216,18 +225,28 @@ private:
         if (selected == -1)
             return;
 
-        wxString addressValue = listView->GetItemText(selected, 0);  // Address 칼럼
-        wxString passwordValue = listView->GetItemText(selected, 1); // Password 칼럼
+        wxString addressValue = listView->GetItemText(selected, 0);
+        wxString passwordValue;
 
-        EditDialog dlg(this, addressValue, passwordValue, FormMode::Edit);
-        if (dlg.ShowModal() == wxID_OK)
+        if (hasPassword)
+            passwordValue = listView->GetItemText(selected, 1);
+
+        // 다이얼로그 생성 및 표시
+        std::unique_ptr<EditDialog> dlg;
+        if (hasPassword)
+            dlg = std::make_unique<EditDialog>(this, addressValue, passwordValue, FormMode::Edit);
+        else
+            dlg = std::make_unique<EditDialog>(this, addressValue, FormMode::Edit);
+
+        if (dlg->ShowModal() == wxID_OK)
         {
-            listView->SetItem(selected, 0, dlg.GetAddress());
-            listView->SetItem(selected, 1, dlg.GetPassword());
+            listView->SetItem(selected, 0, dlg->GetAddress());
+            if (hasPassword)
+                listView->SetItem(selected, 1, dlg->GetPassword());
         }
     }
 
-    void AddList2(wxCommandEvent &)
+    void AddList(wxCommandEvent &)
     {
         EditDialog dlg(this, "", "", FormMode::Add);
 
@@ -238,7 +257,7 @@ private:
         }
     }
 
-    void DeleteList2(wxCommandEvent &)
+    void DeleteList(wxCommandEvent &)
     {
         long selected = listView2->GetFirstSelected();
         if (selected == -1)
@@ -252,8 +271,8 @@ private:
     std::string ListViewToString()
     {
         std::vector<std::string> stringArray;
-        GetListViewItems(listView1, stringArray);
-        GetListViewItems(listView2, stringArray);
+        GetListViewItems(listView1, {0}, stringArray);    // listView1: 1열만 추출
+        GetListViewItems(listView2, {0, 1}, stringArray); // listView2: 0열, 1열 추출
 
         std::string listViewToString = "";
         for (const std::string &str : stringArray)
@@ -262,28 +281,23 @@ private:
         }
         return listViewToString;
     }
-    void GetListViewItems(wxListView *listView, std::vector<std::string> &stringArray)
-    {
 
+    void GetListViewItems(wxListView *listView, const std::vector<int> &columns, std::vector<std::string> &stringArray)
+    {
         int rowCount = listView->GetItemCount();
 
         for (int row = 0; row < rowCount; ++row)
         {
-            wxListItem addressItem;
-            wxListItem passwordItem;
-            addressItem.SetId(row);
-            addressItem.SetColumn(0);
-            // addressItem.SetMask(wxLIST_MASK_TEXT); // 텍스트 가져오기 라는데 SetMask는 대체 뭘하는 함수지요 ?
-
-            passwordItem.SetId(row);
-            passwordItem.SetColumn(1);
-
-            if (listView->GetItem(addressItem) && listView->GetItem(passwordItem))
+            for (int col : columns)
             {
-                // wxLogMessage("Row %d, Col %d: %s", row, 0, addressItem.GetText());
-                // wxLogMessage("Row %d, Col %d: %s", row, 1, passwordItem.GetText());
-                stringArray.push_back(std::string(addressItem.GetText().mb_str()));
-                stringArray.push_back(std::string(passwordItem.GetText().mb_str()));
+                wxListItem item;
+                item.SetId(row);
+                item.SetColumn(col);
+
+                if (listView->GetItem(item))
+                {
+                    stringArray.push_back(std::string(item.GetText().mb_str()));
+                }
             }
         }
     }
