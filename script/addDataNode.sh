@@ -18,14 +18,14 @@ address=${address::-1}
 
 # datanode install+hostset+makeUserHadoop
 sshpass -p $2 ssh ubuntu@$1 -o StrictHostKeyChecking=no "sudo apt-get install git" 
-sshpass -p $2 ssh ubuntu@$1 -o StrictHostKeyChecking=no "git clone https://github.com/psy337337/HadoopInstallTool.git; ./HadoopInstallTool/hostset.sh $address; ./HadoopInstallTool/makeUser.sh"
+sshpass -p $2 ssh ubuntu@$1 -o StrictHostKeyChecking=no "git clone https://github.com/psy337337/HadoopInstallTool.git; ./HadoopInstallTool/script/hostset.sh $address; ./HadoopInstallTool/script/makeUser.sh"
 
 # connect namenode & datanode
 sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd; ssh-copy-id -i /home/hadoop/.ssh/id_rsa.pub hadoop@$1"
 
-sshpass -p hadoop ssh hadoop@$1 -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git; ./HadoopInstallTool/connect.sh"
+sshpass -p hadoop ssh hadoop@$1 -o StrictHostKeyChecking=no -t "cd; git clone https://github.com/psy337337/HadoopInstallTool.git; ./HadoopInstallTool/script/connect.sh"
 
 
 # send Hadoop Setting to datanode
-sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd ~; pwd; source ~/.bashrc; ./HadoopInstallTool/setHadoop-addDataNode.sh"
+sshpass -p hadoop ssh hadoop@hdn -o StrictHostKeyChecking=no -t "cd ~; pwd; source ~/.bashrc; ./HadoopInstallTool/script/setHadoop-addDataNode.sh"
 

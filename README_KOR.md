@@ -47,7 +47,7 @@ sudo apt update
 
 sudo apt install git -y
 git clone https://github.com/psy337337/HadoopInstallTool.git
-chmod +x ./HadoopInstallTool/*.sh
+chmod +x ./HadoopInstallTool/script/*.sh
 ./HadoopInstallTool/install.sh
 
 sudo sed -i "/PasswordAuthentication/ c\PasswordAuthentication yes" /etc/ssh/sshd_config
@@ -61,7 +61,7 @@ sudo apt update
 
 sudo apt install git -y
 git clone https://github.com/psy337337/HadoopInstallTool.git
-chmod +x ./HadoopInstallTool/*.sh
+chmod +x ./HadoopInstallTool/script/*.sh
 ./HadoopInstallTool/install.sh
 
 sudo sed -i "/PasswordAuthentication/ c\PasswordAuthentication yes" /etc/ssh/sshd_config
@@ -84,7 +84,7 @@ sudo passwd ubuntu
 1. IP 주소를 입력할 때 **입력 순서가 중요합니다.**
 
    * **NameNode IP를 제일 앞에 입력해야 합니다.**
-   * 이후 노드들에 대해서는 비밀번호를 입력하지 않아도 됩니다 (`v2.sh` 사용 시).
+   * 이후 노드들에 대해서는 비밀번호를 입력하지 않아도 됩니다 (`install_hadoop_v2.sh` 사용 시).
 
 2. 2번 과정으로 설치를 진행한다면, **모든 노드가 동일한 비밀번호(`ubuntu`)를 사용해야 합니다.**
 
@@ -99,13 +99,13 @@ sudo passwd ubuntu
 🔹 예시 (일반):
 
 ```bash
-./HadoopInstallTool/1.sh (NameNode IP) (DataNode IP) (DataNode 비밀번호) (DataNode IP) (DataNode 비밀번호) ...
+./HadoopInstallTool/install_hadoop_v1.sh (NameNode IP) (DataNode IP) (DataNode 비밀번호) (DataNode IP) (DataNode 비밀번호) ...
 ```
 
 🔹 예시 (실제):
 
 ```bash
-./HadoopInstallTool/1.sh 10.0.20.157 10.0.20.180 ubuntu 10.0.20.181 ubuntu2
+./HadoopInstallTool/install_hadoop_v1.sh 10.0.20.157 10.0.20.180 ubuntu 10.0.20.181 ubuntu2
 ```
 
 
@@ -114,13 +114,13 @@ sudo passwd ubuntu
 🔹 예시 (일반):
 
 ```bash
-./HadoopInstallTool/v2.sh (NameNode IP) (DataNode IP) (DataNode IP) ...
+./HadoopInstallTool/install_hadoop_v2.sh (NameNode IP) (DataNode IP) (DataNode IP) ...
 ```
 
 🔹 예시 (실제):
 
 ```bash
-./HadoopInstallTool/v2.sh 10.0.20.157 10.0.20.180 10.0.20.181
+./HadoopInstallTool/install_hadoop_v2.sh 10.0.20.157 10.0.20.180 10.0.20.181
 ```
 
 

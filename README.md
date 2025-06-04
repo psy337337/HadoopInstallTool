@@ -42,7 +42,7 @@ sudo apt update
 
 sudo apt install git -y
 git clone https://github.com/psy337337/HadoopInstallTool.git
-chmod +x ./HadoopInstallTool/*.sh
+chmod +x ./HadoopInstallTool/script/*.sh
 ./HadoopInstallTool/install.sh
 
 
@@ -57,7 +57,7 @@ sudo apt update
 
 sudo apt install git -y
 git clone https://github.com/psy337337/HadoopInstallTool.git
-chmod +x ./HadoopInstallTool/*.sh
+chmod +x ./HadoopInstallTool/script/*.sh
 ./HadoopInstallTool/install.sh
 
 sudo sed -i "/PasswordAuthentication/ c\PasswordAuthentication yes" /etc/ssh/sshd_config
@@ -90,13 +90,13 @@ Input the Ubuntu password you want `ex. ubuntu`
     🔹General Example
     
     ```java
-    ./HadoopInstallTool/1.sh (NameNode's ip address) (DataNode's ip address) (DataNode's ubuntu passwd) (DataNode's ip address) (DataNode's ubuntu passwd)...
+    ./HadoopInstallTool/install_hadoop_v1.sh (NameNode's ip address) (DataNode's ip address) (DataNode's ubuntu passwd) (DataNode's ip address) (DataNode's ubuntu passwd)...
     ```
     
     🔹Real Example
     
     ```java
-    ./HadoopInstallTool/1.sh 10.0.20.157 10.0.20.180 ubuntu 10.0.20.181 ubuntu2
+    ./HadoopInstallTool/install_hadoop_v1.sh 10.0.20.157 10.0.20.180 ubuntu 10.0.20.181 ubuntu2
     ```
     
 2. **DataNode's ubuntu account password is `ubuntu`**
@@ -104,13 +104,13 @@ Input the Ubuntu password you want `ex. ubuntu`
     🔹General Example
     
     ```java
-    ./HadoopInstallTool/v2.sh (NameNode's ip address) (DataNode's ip address) (DataNode's ip address)...
+    ./HadoopInstallTool/install_hadoop_v2.sh (NameNode's ip address) (DataNode's ip address) (DataNode's ip address)...
     ```
     
     🔹Real Example
     
     ```java
-    ./HadoopInstallTool/v2.sh 10.0.20.157 10.0.20.180 10.0.20.181
+    ./HadoopInstallTool/install_hadoop_v2.sh 10.0.20.157 10.0.20.180 10.0.20.181
     ```
     
 
